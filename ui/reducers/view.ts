@@ -43,8 +43,13 @@ const initialState: View = {
 // A reducer is a function that takes in state, makes a copy, makes changes, returns new state
 const view: (state: View, action: ViewActions) => View = (
   state = initialState,
-  { type, payload }
+  action
 ) => {
+  console.log(state, action)
+
+  const type = action.type
+  const payload = action.payload
+
   let newState: View
 
   switch (type) {
@@ -57,6 +62,7 @@ const view: (state: View, action: ViewActions) => View = (
     }
   }
 
+  console.log(newState)
   return newState
 }
 

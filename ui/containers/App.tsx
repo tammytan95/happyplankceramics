@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { viewGetPageSelector } from '../reducers'
 import { AvailablePage } from '../reducers/view'
 import { setPageActionCreator, setPageActionCreatorType } from '../actions'
+import { store } from '../index'
 
 interface AppProps {
   page: AvailablePage
@@ -14,7 +15,17 @@ class _App extends Component<AppProps> {
     return (
       <div>
         {this.props.page}
-        <button onClick={() => this.props.setPage('cart')}>GO TO CART</button>
+        {/* <button onClick={() => this.props.setPage('cart')}>GO TO CART</button> */}
+        <button
+          onClick={() => {
+            const manuallyCreatedAction = setPageActionCreator('cart')
+
+            store.dispatch(manuallyCreatedAction)
+          }}
+        >
+          New Cart Button
+        </button>
+
         <button onClick={() => this.props.setPage('shop')}>GO TO SHOP</button>
       </div>
     )
