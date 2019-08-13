@@ -4,6 +4,10 @@ import { viewGetPageSelector } from '../reducers'
 import { AvailablePage } from '../reducers/view'
 import { setPageActionCreator, setPageActionCreatorType } from '../actions'
 import { store } from '../index'
+import { Header } from '../components/Header'
+import { HomeView } from '../components/HomeView'
+import { ShopView } from '../components/ShopView'
+import { AboutView } from '../components/AboutView'
 
 interface AppProps {
   page: AvailablePage
@@ -12,22 +16,20 @@ interface AppProps {
 
 class _App extends Component<AppProps> {
   render() {
+    const { page, setPage } = this.props
+
     return (
-      <div>
-        {this.props.page}
-        {/* <button onClick={() => this.props.setPage('cart')}>GO TO CART</button> */}
-        <button
-          onClick={() => {
-            const manuallyCreatedAction = setPageActionCreator('cart')
+      <>
+        <Header {...{ page, setPage }} />
 
-            store.dispatch(manuallyCreatedAction)
-          }}
-        >
-          New Cart Button
-        </button>
-
-        <button onClick={() => this.props.setPage('shop')}>GO TO SHOP</button>
-      </div>
+        {page === 'home' ? (
+          <HomeView />
+        ) : page === 'shop' ? (
+          <ShopView />
+        ) : (
+          <AboutView />
+        )}
+      </>
     )
   }
 }

@@ -1,7 +1,7 @@
 interface reduxStore {
   view: {
     page: 'home' | 'shop' | 'about' | 'productDetail' | 'cart'
-    currentCategory: string
+    currentCategory: string //REFERS TO MENU BAR OPTIONS
     currentProductId: string
   }
   homePage: {
@@ -9,6 +9,7 @@ interface reduxStore {
     productId: string
   }
   categories: [
+    //REFERS TO CATEGORY PICS IN HOME PAGE
     {
       id: string //pipes
       categoryImage: string //pipes.jpg

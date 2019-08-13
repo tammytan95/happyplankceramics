@@ -4,20 +4,23 @@ import {
   CURRENT_CATEGORY,
   CURRENT_PRODUCT_ID,
   SET_PAGE,
+  SET_CURRENT_CATEGORY,
 } from '../konstants/view'
 import { ViewActions } from '../actions'
 // Interfaces define the shape or potential properties that an object must assume
 export type AvailablePage = 'home' | 'shop' | 'about' | 'productDetail' | 'cart'
 
+export type AvailableCategories = 'all' | 'bowls' | 'mugs' | 'tea cups'
+
 interface View {
   [PAGE]: AvailablePage
-  [CURRENT_CATEGORY]: string | undefined
+  [CURRENT_CATEGORY]: AvailableCategories
   [CURRENT_PRODUCT_ID]: string | undefined
 }
 
 const initialState: View = {
   [PAGE]: 'home',
-  [CURRENT_CATEGORY]: undefined,
+  [CURRENT_CATEGORY]: 'all',
   [CURRENT_PRODUCT_ID]: undefined,
 }
 
@@ -55,6 +58,10 @@ const view: (state: View, action: ViewActions) => View = (
   switch (type) {
     case SET_PAGE: {
       newState = set(state, PAGE, payload)
+      break
+    }
+    case SET_CURRENT_CATEGORY: {
+      newState = set(state, CURRENT_CATEGORY, payload)
       break
     }
     default: {
